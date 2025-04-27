@@ -9,7 +9,7 @@
             --ui-hover: #454545;
         }
 
-        body {
+        body { 
             font-family: 'Arial', sans-serif;
             background-color: var(--background-primary);
             color: var(--text-primary);
