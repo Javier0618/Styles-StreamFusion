@@ -1,6 +1,6 @@
         :root {
             --background-primary: #121212;
-            --background-secondary: #f90c0c;
+            --background-secondary: #1E1E1E;
             --text-primary: #FFFFFF;
             --text-secondary: #dedede;
             --accent-primary: #E50914;
@@ -9,7 +9,7 @@
             --ui-hover: #454545;
         }
 
-        body { 
+        body {
             font-family: 'Arial', sans-serif;
             background-color: var(--background-primary);
             color: var(--text-primary);
@@ -656,3 +656,4 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+/* Películas */
