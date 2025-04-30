@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
 let currentVideoUrl = ""
 let retryCount = 0
 const MAX_RETRIES = 3
@@ -448,4 +447,3 @@ window.addEventListener("error", (e) => {
   })
   checkAllResourcesLoaded()
 })
-});
