@@ -9,3 +9,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-minify"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
