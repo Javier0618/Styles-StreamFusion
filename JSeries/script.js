@@ -1,28 +1,3 @@
-const apiKey = "32e5e53999e380a0291d66fb304153fe"
-const seriesId = 93405; // ID de la serie que quieres consultar (por ejemplo, Stranger Things)
-const episodeVideos = {
-  1: {
-                1: "https://unlimplayer.top/embed/viknamsauhkml7b",
-                2: "https://unlimplayer.top/embed/hsrg9dmvrdawcog",
-                3: "https://unlimplayer.top/embed/9kuqb7whm8qmxjp",
-                4: "https://unlimplayer.top/embed/cabwklp5ksxr0ps",
-                5: "https://unlimplayer.top/embed/i4kb9ugzud5perw",
-                6: "https://unlimplayer.top/embed/ws6o4usqnja0lgl",
-                7: "https://unlimplayer.top/embed/9dyx8mjrsbvbfg",
-                8: "https://unlimplayer.top/embed/w26u1dfv9ulshnz",
-                9: "https://unlimplayer.top/embed/h10vymxwzpzohfg",
-            },
-             2: {
-                1: "https://unlimplayer.top/embed/ejdct1e1",
-                2: "https://unlimplayer.top/embed/ejdct1e2",
-                3: "https://unlimplayer.top/embed/ejdct1e3",
-                4: "https://unlimplayer.top/embed/ejdct1e4",
-                5: "https://unlimplayer.top/embed/ejdct1e5",
-                6: "https://unlimplayer.top/embed/ejdct1e6",
-                7: "https://unlimplayer.top/embed/ejdct1e7",
-            },
-};
-
 let currentVideoUrl = ""
 let retryCount = 0
 const MAX_RETRIES = 3
