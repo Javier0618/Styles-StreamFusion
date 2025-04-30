@@ -1,3 +1,5 @@
+const apiKey = "32e5e53999e380a0291d66fb304153fe"
+
 let currentVideoUrl = ""
 let retryCount = 0
 const MAX_RETRIES = 3
