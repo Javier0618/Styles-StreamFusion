@@ -97,6 +97,9 @@
         background-color: var(--background-secondary);
         border-radius: 10px;
       }
+      .anuncio {
+        padding-top: 5px;
+      }
      
             /* Estilos para pantallas de 600px y superiores */
       @media (min-width: 1401px) {
