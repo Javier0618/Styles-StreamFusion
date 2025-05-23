@@ -259,7 +259,7 @@
                 border-radius: 10px;
             }
             .anuncio {
-                padding: 2px;
+                padding-top: 5px;
             }
             .movie-overview {
                 background-color: var(--ui-element);
