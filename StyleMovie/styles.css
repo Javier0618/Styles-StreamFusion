@@ -106,6 +106,9 @@
             border-top-color: var(--accent-primary);
             animation: spin 1s ease-in-out infinite;
         }
+            .anuncio {
+                padding-top: 5px;
+            }
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -257,9 +260,6 @@
                 height: auto;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
                 border-radius: 10px;
-            }
-            .anuncio {
-                padding-top: 5px;
             }
             .movie-overview {
                 background-color: var(--ui-element);
