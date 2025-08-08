@@ -1,11 +1,12 @@
+
         :root {
-            --background-primary: #121212;
-            --background-secondary: #1E1E1E;
+            --background-primary: #14151b;
+            --background-secondary: #0e1018;
             --text-primary: #FFFFFF;
             --text-secondary: #dedede;
             --accent-primary: #E50914;
             --accent-secondary: #F5C518;
-            --ui-element: #2C2C2C;
+            --ui-element: #0e1018;
             --ui-hover: #454545;
         }
 
