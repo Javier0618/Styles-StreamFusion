@@ -1,4 +1,3 @@
-
       :root {
         --background-primary: #14151b;
         --background-secondary: #0e1018;
@@ -161,14 +160,17 @@
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
           flex-direction: column;
           max-height: 100%;
+          overflow: auto; /* Prevenir desbordamiento */
+          box-sizing: border-box; /* Incluir padding en dimensiones */
         }
 
         .series-details h2 {
           font-size: 1.5vw;
-          line-height: 1;
-          margin-bottom: 0;
+          margin-bottom: 0px;
           margin-top: 0;
           color: var(--accent-secondary);
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .series-details p {
@@ -345,14 +347,17 @@
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
           flex-direction: column;
           max-height: 100%;
+          overflow: auto; /* Prevenir desbordamiento */
+          box-sizing: border-box; /* Incluir padding en dimensiones */
         }
 
         .series-details h2 {
           font-size: 1.5vw;
-          line-height: 1;
-          margin-bottom: 0;
+          margin-bottom: 0px;
           margin-top: 0;
           color: var(--accent-secondary);
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .series-details p {
@@ -511,14 +516,17 @@
           border-radius: 10px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
           flex-direction: column;
+          overflow: auto; /* Prevenir desbordamiento */
+          box-sizing: border-box; /* Incluir padding en dimensiones */
         }
 
         .series-details h2 {
           font-size: 4vw;
-          line-height: 1.1;
           margin-bottom: 8px;
           margin-top: 0;
           color: var(--accent-secondary);
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .series-details p {
@@ -783,4 +791,3 @@
     100% { transform: rotate(360deg); }
 }
 /* Series */
-  
