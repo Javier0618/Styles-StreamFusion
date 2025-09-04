@@ -1,5 +1,5 @@
 
-        const TMDB_API_KEY = '8265bd1679663a7ea12ac168da84d2e8';
+        const TMDB_API_KEY = '24d863d54c86392e6078b351b18c0e4c';
         const availableProviders = ['vidhide', 'streamwish', 'filemoon', 'voe', 'doodstream', 'streamtape', 'netu', 'download'];
         let selectedProviders = [];
 
