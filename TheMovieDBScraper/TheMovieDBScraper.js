@@ -126,7 +126,7 @@
             
             try {
                 const response = await fetch(
-                    `${BASE_URL}/search/${contentType}?api_key=${API_KEY}&language=es-ES&query=${encodeURIComponent(query)}`
+                    `${BASE_URL}/search/${contentType}?api_key=${API_KEY}&language=es-MX&query=${encodeURIComponent(query)}`
                 );
                 
                 if (!response.ok) throw new Error('Error en la búsqueda');
@@ -310,7 +310,7 @@
             clearResults();
 
             try {
-                const mediaResponse = await fetch(`${BASE_URL}/${contentType}/${mediaId}?api_key=${API_KEY}&language=es-ES`);
+                const mediaResponse = await fetch(`${BASE_URL}/${contentType}/${mediaId}?api_key=${API_KEY}&language=es-MX`);
 
                 if (!mediaResponse.ok) {
                     throw new Error(`${contentType === 'tv' ? 'Serie' : 'Película'} no encontrada. Verifica el ID.`);
@@ -345,7 +345,7 @@
                             updateProgress(i + 1, validSeasons.length);
 
                             const seasonResponse = await fetch(
-                                `${BASE_URL}/tv/${mediaId}/season/${season.season_number}?api_key=${API_KEY}&language=es-ES`
+                                `${BASE_URL}/tv/${mediaId}/season/${season.season_number}?api_key=${API_KEY}&language=es-MX`
                             );
 
                             if (seasonResponse.ok) {
