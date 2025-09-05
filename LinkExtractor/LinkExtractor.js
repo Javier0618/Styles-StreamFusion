@@ -1,5 +1,5 @@
 
-        const TMDB_API_KEY = '32e5e53999e380a0291d66fb304153fe';
+        const TMDB_API_KEY = '8265bd1679663a7ea12ac168da84d2e8';
         const availableProviders = ['vidhide', 'streamwish', 'filemoon', 'voe', 'doodstream', 'streamtape', 'netu', 'download'];
         let selectedProviders = [];
 
@@ -63,6 +63,109 @@
                 handleScrape();
             }
         });
+
+        async function handleSearch() {
+            const query = document.getElementById('searchQuery').value.trim();
+            const searchType = document.getElementById('searchType').value;
+            
+            if (!query) {
+                showToast('Por favor ingresa un término de búsqueda', 'error');
+                return;
+            }
+
+            const searchBtn = document.getElementById('searchBtn');
+            const searchResults = document.getElementById('searchResults');
+            const searchResultsList = document.getElementById('searchResultsList');
+
+            // Set loading state
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando...</div>';
+            searchResults.style.display = 'none';
+
+            try {
+                console.log(`[v0] Searching for: ${query}, Type: ${searchType}`);
+                
+                const searchUrl = `https://api.themoviedb.org/3/search/${searchType}?api_key=${TMDB_API_KEY}&language=es-ES&query=${encodeURIComponent(query)}`;
+                const response = await fetch(searchUrl);
+                
+                if (!response.ok) {
+                    throw new Error('Error al buscar en TMDB');
+                }
+                
+                const data = await response.json();
+                console.log(`[v0] Search results:`, data);
+                
+                displaySearchResults(data.results);
+                showToast(`Se encontraron ${data.results.length} resultados`);
+                
+            } catch (error) {
+                console.error('[v0] Search error:', error);
+                showToast('Error al realizar la búsqueda', 'error');
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = '🔍 Buscar';
+            }
+        }
+
+        function displaySearchResults(results) {
+            const searchResults = document.getElementById('searchResults');
+            const searchResultsList = document.getElementById('searchResultsList');
+            
+            if (results.length === 0) {
+                searchResultsList.innerHTML = '<div class="no-results">No se encontraron resultados</div>';
+                searchResults.style.display = 'block';
+                return;
+            }
+
+            const resultsHtml = results.map(item => {
+                const title = item.title || item.name;
+                const releaseDate = item.release_date || item.first_air_date;
+                const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
+                const type = item.media_type || (item.title ? 'movie' : 'tv');
+                const typeLabel = type === 'movie' ? 'Película' : 'Serie';
+                const posterUrl = item.poster_path 
+                    ? `https://image.tmdb.org/t/p/w200${item.poster_path}`
+                    : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjZGRkIi8+Cjx0ZXh0IHg9IjMwIiB5PSI0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
+
+                return `
+                    <div class="search-result-item" onclick="selectSearchResult(${item.id}, '${type}', '${title.replace(/'/g, "\\'")}')">
+                        <img src="${posterUrl}" alt="${title}" class="result-poster" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjZGRkIi8+Cjx0ZXh0IHg9IjMwIiB5PSI0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo='" />
+                        <div class="result-info">
+                            <div class="result-title">${title}</div>
+                            <div class="result-details">
+                                <span class="result-type ${type}">${typeLabel}</span>
+                                <span>Año: ${year}</span>
+                                ${item.overview ? `<br><span style="font-size: 13px;">${item.overview.substring(0, 100)}${item.overview.length > 100 ? '...' : ''}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            searchResultsList.innerHTML = resultsHtml;
+            searchResults.style.display = 'block';
+        }
+
+        function selectSearchResult(id, type, title) {
+            document.getElementById('movieId').value = id;
+            document.getElementById('contentType').value = type;
+            
+            // Hide search results
+            document.getElementById('searchResults').style.display = 'none';
+            
+            // Scroll to ID search section
+            document.querySelector('.search-section:last-of-type').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+            
+            showToast(`Seleccionado: ${title} (ID: ${id})`, 'success');
+            
+            // Optional: Auto-extract if user wants
+            if (confirm(`¿Quieres extraer enlaces para "${title}" ahora?`)) {
+                handleScrape();
+            }
+        }
 
         // Main scraping function
         async function handleScrape() {
@@ -372,12 +475,12 @@
                 /'(https?:\/\/[^']+)'/g,         // URLs dentro de comillas simples
                 /src="(https?:\/\/[^"]+)"/g,     // URLs en atributos src
                 /href="(https?:\/\/[^"]+)"/g,    // URLs en atributos href
-                /url\((https?:\/\/[^)]+)\)/g,    // URLs en url() CSS
+                /url$$(https?:\/\/[^)]+)$$/g,    // URLs en url() CSS
                 /data-src="(https?:\/\/[^"]+)"/g, // URLs en atributos data-src
                 // NUEVO PATRÓN: Para URLs dentro de llamadas a funciones JavaScript como onclick
                 // Busca ' o " seguido de http(s)://... seguido de ' o "
                 // Captura el contenido del primer grupo (la URL)
-                /(?:abrirReproductorInterno|copiarEnlace)\(['"](https?:\/\/[^'"]+)['"]\)/g
+                /(?:abrirReproductorInterno|copiarEnlace)$$['"](https?:\/\/[^'"]+)['"]$$/g
             ];
             
             console.log(`[v0] Extracting links from text (length: ${text.length})`);
@@ -533,8 +636,7 @@
             if (data.debug) {
                 html += ``
                     + `    <div class="alert alert-info">`
-                    + `        <strong>Información de extracción:</strong><br>`
-                    + `        URL exitosa: ${data.debug.successUrl}<br>`
+                    + `        <strong>Extracción exitosa</strong><br>`
                     + `        Enlaces totales encontrados: ${data.debug.totalLinksFound}<br>`
                     + `        Enlaces únicos: ${data.debug.uniqueLinksFound}`
                     + `    </div>`;
