@@ -85,7 +85,7 @@
             try {
                 console.log(`[v0] Searching for: ${query}, Type: ${searchType}`);
                 
-                const searchUrl = `https://api.themoviedb.org/3/search/${searchType}?api_key=${TMDB_API_KEY}&language=es-ES&query=${encodeURIComponent(query)}`;
+                const searchUrl = `https://api.themoviedb.org/3/search/${searchType}?api_key=${TMDB_API_KEY}&language=es-MX&query=${encodeURIComponent(query)}`;
                 const response = await fetch(searchUrl);
                 
                 if (!response.ok) {
@@ -194,7 +194,7 @@
                 
                 // Get TMDB data
                 const tmdbEndpoint = contentType === 'movie' ? 'movie' : 'tv';
-                const tmdbUrl = `https://api.themoviedb.org/3/${tmdbEndpoint}/${movieId}?api_key=${TMDB_API_KEY}&language=es-ES`;
+                const tmdbUrl = `https://api.themoviedb.org/3/${tmdbEndpoint}/${movieId}?api_key=${TMDB_API_KEY}&language=es-MX`;
                 
                 console.log(`[v0] Fetching TMDB data from: ${tmdbUrl}`);
                 const tmdbResponse = await fetch(tmdbUrl);
@@ -336,7 +336,7 @@
             for (let seasonNum = 1; seasonNum <= numberOfSeasons; seasonNum++) {
                 console.log(`[v0] Processing season ${seasonNum}`);
                 // Get season details from TMDB
-                const seasonUrl = `https://api.themoviedb.org/3/tv/${tmdbId}/season/${seasonNum}?api_key=${TMDB_API_KEY}&language=es-ES`;
+                const seasonUrl = `https://api.themoviedb.org/3/tv/${tmdbId}/season/${seasonNum}?api_key=${TMDB_API_KEY}&language=es-MX`;
 
                 try {
                     const seasonResponse = await fetch(seasonUrl);
